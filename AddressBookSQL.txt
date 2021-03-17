@@ -1,0 +1,342 @@
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| payroll_service    |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.1022 sec)
+ MySQL  localhost:33060+ ssl  payroll_service  SQL > create database address_book_service;
+Query OK, 1 row affected (0.1655 sec)
+ MySQL  localhost:33060+ ssl  payroll_service  SQL > use address_book_service
+Default schema set to `address_book_service`.
+Fetching table and column names from `address_book_service` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select database();
++----------------------+
+| database()           |
++----------------------+
+| address_book_service |
++----------------------+
+1 row in set (0.0006 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > create table address_book(
+                                                       -> id int unsigned not null auto_increment,
+                                                       -> firstname varchar(150) not null,
+                                                       -> lastname varchar(150) not null,
+                                                       -> address varchar(150) not null,
+                                                       -> city varchar(30) not null,
+                                                       -> state varchar(30) not null,
+                                                       -> zip int signed not null,
+                                                       -> phone_no varchar(12) not null,
+                                                       -> email varchar(150) not null,
+                                                       -> primary key (id)
+                                                       -> )
+                                                       -> ;
+Query OK, 0 rows affected (1.9325 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > describe address_book
+                                                       -> ;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| id        | int unsigned | NO   | PRI | NULL    | auto_increment |
+| firstname | varchar(150) | NO   |     | NULL    |                |
+| lastname  | varchar(150) | NO   |     | NULL    |                |
+| address   | varchar(150) | NO   |     | NULL    |                |
+| city      | varchar(30)  | NO   |     | NULL    |                |
+| state     | varchar(30)  | NO   |     | NULL    |                |
+| zip       | int          | NO   |     | NULL    |                |
+| phone_no  | varchar(12)  | NO   |     | NULL    |                |
+| email     | varchar(150) | NO   |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+9 rows in set (0.1301 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > insert into address_book (first_name, last_name, address, city, state, zip, phone_no, email )values
+                                                       ->     -> ('kiran', 'pedapati', '1234 street', 'btd', 'pnb', 151001, '9999999999', 'kiran@gmail.com'),
+                                                       ->     -> ('test', 'test', '12345 street', 'pta', 'pnb', 147001, '9999999998', 'test@gmail.com'),
+                                                       ->
+                                                       -> ^C
+ MySQL  localhost:33060+ ssl  address_book_service  SQL >  insert into address_book (first_name, last_name, address, city, state, zip, phone_no, email )values
+                                                       ->     -> ('mani', ' pragada', '1234 street', 'btd', 'pnb', 151001, '9999999999', 'mani@gmail.com');
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> ('mani', ' pragada', '1234 street', 'btd', 'pnb', 151001, '9999999999', 'mani' at line 2
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > insert into address_book (first_name, last_name, address, city, state, zip, phone_no, email )
+                                                       -> values ('mani', ' pragada', '1234 street', 'btd', 'pnb', 151001, '9999999999', 'mani@gmail.com');
+ERROR: 1054: Unknown column 'first_name' in 'field list'
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > insert into address_book (first_name, last_name, address, city, state, zip, phone_no, email ) values ('mani', ' pragada', '1234 street', 'btd', 'pnb', 151001, '9999999999', 'mani@gmail.com');
+ERROR: 1054: Unknown column 'first_name' in 'field list'
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > insert into address_book (firstname, lastname, address, city, state, zip, phone_no, email ) values ('mani', ' pragada', '1234 street', 'btd', 'pnb', 151001, '9999999999', 'mani@gmail.com');
+Query OK, 1 row affected (0.1137 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > insert into address_book (firstname, lastname, address, city, state, zip, phone_no, email ) values ('test', ' pragada', '12345 street', 'ptaila', 'pnb', 147001, '9999999998', 'testl@gmail.com');
+Query OK, 1 row affected (0.2673 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > insert into address_book (firstname, lastname, address, city, state, zip, phone_no, email ) values ('test1', ' pragada', '1234553 street', 'nabha', 'pnb', 147201, '9999999998', 'testnabha@gmail.com');
+Query OK, 1 row affected (0.1765 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select * from address_book;
++----+-----------+----------+----------------+--------+-------+--------+------------+---------------------+
+| id | firstname | lastname | address        | city   | state | zip    | phone_no   | email               |
++----+-----------+----------+----------------+--------+-------+--------+------------+---------------------+
+|  1 | mani      |  pragada   | 1234 street    | btd    | pnb   | 151001 | 9999999999 | mani@gmail.com     |
+|  2 | test      |  pragada   | 12345 street   | ptaila | pnb   | 147001 | 9999999998 | testl@gmail.com     |
+|  3 | test1     |  pragada   | 1234553 street | nabha  | pnb   | 147201 | 9999999998 | testnabha@gmail.com |
++----+-----------+----------+----------------+--------+-------+--------+------------+---------------------+
+3 rows in set (0.0007 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > update address_book set city='bathinda' where first_name='mani';
+ERROR: 1054: Unknown column 'first_name' in 'where clause'
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > update address_book set city='bathinda' where firstname='mani';
+Query OK, 1 row affected (0.8225 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select * from address_book;
++----+-----------+----------+----------------+----------+-------+--------+------------+---------------------+
+| id | firstname | lastname | address        | city     | state | zip    | phone_no   | email               |
++----+-----------+----------+----------------+----------+-------+--------+------------+---------------------+
+|  1 | mani      |  pragada   | 1234 street    | bathinda | pnb   | 151001 | 9999999999 | mani@gmail.com     |
+|  2 | test      |  pragada   | 12345 street   | ptaila   | pnb   | 147001 | 9999999998 | testl@gmail.com     |
+|  3 | test1     |  pragada   | 1234553 street | nabha    | pnb   | 147201 | 9999999998 | testnabha@gmail.com |
++----+-----------+----------+----------------+----------+-------+--------+------------+---------------------+
+3 rows in set (0.0008 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > update address_book set city='patiala' where firstname='test';
+Query OK, 1 row affected (0.0880 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select * from address_book;
++----+-----------+----------+----------------+----------+-------+--------+------------+---------------------+
+| id | firstname | lastname | address        | city     | state | zip    | phone_no   | email               |
++----+-----------+----------+----------------+----------+-------+--------+------------+---------------------+
+|  1 | mani      |  pragada   | 1234 street    | bathinda | pnb   | 151001 | 9999999999 | mani@gmail.com     |
+|  2 | test      |  pragada   | 12345 street   | patiala  | pnb   | 147001 | 9999999998 | testl@gmail.com     |
+|  3 | test1     |  pragada   | 1234553 street | nabha    | pnb   | 147201 | 9999999998 | testnabha@gmail.com |
++----+-----------+----------+----------------+----------+-------+--------+------------+---------------------+
+3 rows in set (0.1083 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > update address_book set city='PB34' where firstname='test1';
+Query OK, 1 row affected (0.1014 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select * from address_book;
++----+-----------+----------+----------------+----------+-------+--------+------------+---------------------+
+| id | firstname | lastname | address        | city     | state | zip    | phone_no   | email               |
++----+-----------+----------+----------------+----------+-------+--------+------------+---------------------+
+|  1 | mani      |  pragada   | 1234 street    | bathinda | pnb   | 151001 | 9999999999 | mani@gmail.com     |
+|  2 | test      |  pragada   | 12345 street   | patiala  | pnb   | 147001 | 9999999998 | testl@gmail.com     |
+|  3 | test1     |  pragada   | 1234553 street | PB34     | pnb   | 147201 | 9999999998 | testnabha@gmail.com |
++----+-----------+----------+----------------+----------+-------+--------+------------+---------------------+
+3 rows in set (0.0008 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > delete from address_book where firstname='test1';
+Query OK, 1 row affected (0.1633 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select * from address_book;
++----+-----------+----------+--------------+----------+-------+--------+------------+-----------------+
+| id | firstname | lastname | address      | city     | state | zip    | phone_no   | email           |
++----+-----------+----------+--------------+----------+-------+--------+------------+-----------------+
+|  1 | mani      |  pragada   | 1234 street  | bathinda | pnb   | 151001 | 9999999999 | mani@gmail.com |
+|  2 | test      |  pragada   | 12345 street | patiala  | pnb   | 147001 | 9999999998 | testl@gmail.com |
++----+-----------+----------+--------------+----------+-------+--------+------------+-----------------+
+2 rows in set (0.0008 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select firstname,lastname from address_book where city='bathinda';
++-----------+----------+
+| firstname | lastname |
++-----------+----------+
+| mani      |  pragada   |
++-----------+----------+
+1 row in set (0.0007 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select firstname,lastname from address_book where state = 'pnb';
++-----------+----------+
+| firstname | lastname |
++-----------+----------+
+| mani      |  pragada   |
+| test      |  pragada   |
++-----------+----------+
+2 rows in set (0.0008 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select city,count(firstname) from address_book group by city;
++----------+------------------+
+| city     | count(firstname) |
++----------+------------------+
+| bathinda |                1 |
+| patiala  |                1 |
++----------+------------------+
+2 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select state,count(first_name) from address_book group by sta                                           select state,count(first_name) from address_book group by stat                                          select state,count(first_name) from address_book^Croup by state;
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select state,count(firstname) from address_book group by state;
++-------+------------------+
+| state | count(firstname) |
++-------+------------------+
+| pnb   |                2 |
++-------+------------------+
+1 row in set (0.0011 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select * from address_book order by state;
++----+-----------+----------+--------------+----------+-------+--------+------------+-----------------+
+| id | firstname | lastname | address      | city     | state | zip    | phone_no   | email           |
++----+-----------+----------+--------------+----------+-------+--------+------------+-----------------+
+|  1 | mani      |  pragada   | 1234 street  | bathinda | pnb   | 151001 | 9999999999 | mani@gmail.com |
+|  2 | test      |  pragada   | 12345 street | patiala  | pnb   | 147001 | 9999999998 | testl@gmail.com |
++----+-----------+----------+--------------+----------+-------+--------+------------+-----------------+
+2 rows in set (0.0238 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select * from address_book order by city;
++----+-----------+----------+--------------+----------+-------+--------+------------+-----------------+
+| id | firstname | lastname | address      | city     | state | zip    | phone_no   | email           |
++----+-----------+----------+--------------+----------+-------+--------+------------+-----------------+
+|  1 | mani      |  pragada   | 1234 street  | bathinda | pnb   | 151001 | 9999999999 | mani@gmail.com |
+|  2 | test      |  pragada   | 12345 street | patiala  | pnb   | 147001 | 9999999998 | testl@gmail.com |
++----+-----------+----------+--------------+----------+-------+--------+------------+-----------------+
+2 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > insert into address_book (firstname, lastname, address, city, state, zip, phone_no, email ) values ('aaaabb', ' pragada', '1234553 street', 'known', 'pnb', 147201, '9999999998', 'tetnabha@gmail.com');
+Query OK, 1 row affected (0.0976 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select * from address_book order by city;
++----+-----------+----------+----------------+----------+-------+--------+------------+--------------------+
+| id | firstname | lastname | address        | city     | state | zip    | phone_no   | email              |
++----+-----------+----------+----------------+----------+-------+--------+------------+--------------------+
+|  1 | mani      |  pragada   | 1234 street    | bathinda | pnb   | 151001 | 9999999999 | mani@gmail.com    |
+|  4 | aaaabb    |  pragada   | 1234553 street | known    | pnb   | 147201 | 9999999998 | tetnabha@gmail.com |
+|  2 | test      |  pragada   | 12345 street   | patiala  | pnb   | 147001 | 9999999998 | testl@gmail.com    |
++----+-----------+----------+----------------+----------+-------+--------+------------+--------------------+
+3 rows in set (0.1035 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select * from address_book where state='pnb' order by firstname;
++----+-----------+----------+----------------+----------+-------+--------+------------+--------------------+
+| id | firstname | lastname | address        | city     | state | zip    | phone_no   | email              |
++----+-----------+----------+----------------+----------+-------+--------+------------+--------------------+
+|  4 | aaaabb    |  pragada   | 1234553 street | known    | pnb   | 147201 | 9999999998 | tetnabha@gmail.com |
+|  1 | mani      |  pragada   | 1234 street    | bathinda | pnb   | 151001 | 9999999999 | mani@gmail.com    |
+|  2 | test      |  pragada   | 12345 street   | patiala  | pnb   | 147001 | 9999999998 | testl@gmail.com    |
++----+-----------+----------+----------------+----------+-------+--------+------------+--------------------+
+3 rows in set (0.0011 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > alter table address_book add type varchar(150) after lastname;
+Query OK, 0 rows affected (3.9587 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select * from address_book;
++----+-----------+----------+------+----------------+----------+-------+--------+------------+--------------------+
+| id | firstname | lastname | type | address        | city     | state | zip    | phone_no   | email              |
++----+-----------+----------+------+----------------+----------+-------+--------+------------+--------------------+
+|  1 | mani      |  pragada   | NULL | 1234 street    | bathinda | pnb   | 151001 | 9999999999 | mani@gmail.com    |
+|  2 | test      |  pragada   | NULL | 12345 street   | patiala  | pnb   | 147001 | 9999999998 | testl@gmail.com    |
+|  4 | aaaabb    |  pragada   | NULL | 1234553 street | known    | pnb   | 147201 | 9999999998 | tetnabha@gmail.com |
++----+-----------+----------+------+----------------+----------+-------+--------+------------+--------------------+
+3 rows in set (0.0008 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > describe address_book;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| id        | int unsigned | NO   | PRI | NULL    | auto_increment |
+| firstname | varchar(150) | NO   |     | NULL    |                |
+| lastname  | varchar(150) | NO   |     | NULL    |                |
+| type      | varchar(150) | YES  |     | NULL    |                |
+| address   | varchar(150) | NO   |     | NULL    |                |
+| city      | varchar(30)  | NO   |     | NULL    |                |
+| state     | varchar(30)  | NO   |     | NULL    |                |
+| zip       | int          | NO   |     | NULL    |                |
+| phone_no  | varchar(12)  | NO   |     | NULL    |                |
+| email     | varchar(150) | NO   |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+10 rows in set (0.1339 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > update address_book set type='family' where firstname='mani';
+Query OK, 1 row affected (0.1817 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > update address_book set type='friends' where firstname='test';
+Query OK, 1 row affected (0.1802 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > update address_book set type='general' where firstname='aaaabb';
+Query OK, 1 row affected (0.0919 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select * from address_book;
++----+-----------+----------+---------+----------------+----------+-------+--------+------------+--------------------+
+| id | firstname | lastname | type    | address        | city     | state | zip    | phone_no   | email              |
++----+-----------+----------+---------+----------------+----------+-------+--------+------------+--------------------+
+|  1 | mani      |  pragada   | family  | 1234 street    | bathinda | pnb   | 151001 | 9999999999 | mani@gmail.com    |
+|  2 | test      |  pragada   | friends | 12345 street   | patiala  | pnb   | 147001 | 9999999998 | testl@gmail.com    |
+|  4 | aaaabb    |  pragada   | general | 1234553 street | known    | pnb   | 147201 | 9999999998 | tetnabha@gmail.com |
++----+-----------+----------+---------+----------------+----------+-------+--------+------------+--------------------+
+3 rows in set (0.0008 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select type,count(type) from address_book group by type;
++---------+-------------+
+| type    | count(type) |
++---------+-------------+
+| family  |           1 |
+| friends |           1 |
+| general |           1 |
++---------+-------------+
+3 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select type,count() from address_book group by type;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') from address_book group by type' at line 1
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > insert into address_book (firstname, lastname, address, city, state, zip, phone_no, email ) values ('avasaas', ' pragada','friend', '1234553 street', 'known', 'pnb', 147201, '9999999998', 'tetnabha@gmail.com');
+ERROR: 1136: Column count doesn't match value count at row 1
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > insert into address_book (firstname, lastname,type, address, city, state, zip, phone_no, email ) values ('avasaas', ' pragada','friend', '1234553 street', 'known', 'pnb', 147201, '9999999998', 'tetnabha@gmail.com');
+Query OK, 1 row affected (0.0676 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select type,count(*) from address_book group by type;
++---------+----------+
+| type    | count(*) |
++---------+----------+
+| family  |        1 |
+| friends |        1 |
+| general |        1 |
+| friend  |        1 |
++---------+----------+
+4 rows in set (0.0200 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select type,phone_no,count(*) from address_book group by type;
++---------+------------+----------+
+| type    | phone_no   | count(*) |
++---------+------------+----------+
+| family  | 9999999999 |        1 |
+| friends | 9999999998 |        1 |
+| general | 9999999998 |        1 |
+| friend  | 9999999998 |        1 |
++---------+------------+----------+
+4 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > insert into address_book (firstname, lastname,type, address, city, state, zip, phone_no, email ) values ('avas', ' pragada','friends', '1234553 street', 'known', 'pnb', 147201, '9999999998', 'tetnabha@gmail.com');
+Query OK, 1 row affected (0.1479 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select type,phone_no,count(*) from address_book group by type;
++---------+------------+----------+
+| type    | phone_no   | count(*) |
++---------+------------+----------+
+| family  | 9999999999 |        1 |
+| friends | 9999999998 |        2 |
+| general | 9999999998 |        1 |
+| friend  | 9999999998 |        1 |
++---------+------------+----------+
+4 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > insert into address_book (firstname, lastname,type, address, city, state, zip, phone_no, email ) values ('avs', ' pragada','friends', '1234553 street', 'known', 'pnb', 147201, '99999429998', 'tetnabha@gmail.com');
+Query OK, 1 row affected (0.0625 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select type,phone_no,count(*) from address_book group by type;
++---------+------------+----------+
+| type    | phone_no   | count(*) |
++---------+------------+----------+
+| family  | 9999999999 |        1 |
+| friends | 9999999998 |        3 |
+| general | 9999999998 |        1 |
+| friend  | 9999999998 |        1 |
++---------+------------+----------+
+4 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select type,phone_no,count(phone_no) from address_book group by type;
++---------+------------+-----------------+
+| type    | phone_no   | count(phone_no) |
++---------+------------+-----------------+
+| family  | 9999999999 |               1 |
+| friends | 9999999998 |               3 |
+| general | 9999999998 |               1 |
+| friend  | 9999999998 |               1 |
++---------+------------+-----------------+
+4 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select type,phone_no,count(*) from address_book group by type;
++---------+------------+----------+
+| type    | phone_no   | count(*) |
++---------+------------+----------+
+| family  | 9999999999 |        1 |
+| friends | 9999999998 |        3 |
+| general | 9999999998 |        1 |
+| friend  | 9999999998 |        1 |
++---------+------------+----------+
+4 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select type,phone_no,count(*) from address_book group by type;^C
+ MySQL  localhost:33060+ ssl  address_book_service  SQL > select * from address_book;
++----+-----------+----------+---------+----------------+----------+-------+--------+-------------+--------------------+
+| id | firstname | lastname | type    | address        | city     | state | zip    | phone_no    | email              |
++----+-----------+----------+---------+----------------+----------+-------+--------+-------------+--------------------+
+|  1 | mani      |  pragada   | family  | 1234 street    | bathinda | pnb   | 151001 | 9999999999  | mani@gmail.com    |
+|  2 | test      |  pragada   | friends | 12345 street   | patiala  | pnb   | 147001 | 9999999998  | testl@gmail.com    |
+|  4 | aaaabb    |  pragada   | general | 1234553 street | known    | pnb   | 147201 | 9999999998  | tetnabha@gmail.com |
+|  5 | avasaas   |  pragada   | friend  | 1234553 street | known    | pnb   | 147201 | 9999999998  | tetnabha@gmail.com |
+|  6 | avas      |  pragada   | friends | 1234553 street | known    | pnb   | 147201 | 9999999998  | tetnabha@gmail.com |
+|  7 | avs       |  pragada   | friends | 1234553 street | known    | pnb   | 147201 | 99999429998 | tetnabha@gmail.com |
++----+-----------+----------+---------+----------------+----------+-------+--------+-------------+--------------------+
+6 rows in set (0.0008 sec)
